@@ -1,0 +1,53 @@
+import numpy as np
+
+# Input patterns (2 features + bias)
+X = np.array([[1, 1, 1],     # Class 1
+              [1, -1, 1],    # Class 1
+              [-1, 1, 1],    # Class 2
+              [-1, -1, 1]])  # Class 2
+
+# Desired outputs (for visualization only, not used in Hebb's rule)
+Y = np.array([1, 1, -1, -1])
+
+# Initialize weights
+weights = np.zeros(3)
+
+# Hebb's learning rule: w = w + x*y
+for i in range(len(X)):
+    weights += X[i] * Y[i]
+    print(f"After sample {i+1}, updated weights: {weights}")
+
+# Display final weights
+print("\nFinal weights after Hebb's learning:", weights)
+
+
+---------------------------------------------------------
+
+#DELTA
+import numpy as np
+
+# Input patterns (2 features + bias)
+X = np.array([[1, 1, 1],
+              [1, -1, 1],
+              [-1, 1, 1],
+              [-1, -1, 1]])
+
+# Desired outputs
+Y = np.array([1, 1, -1, -1])
+
+# Initialize weights
+weights = np.zeros(3)
+learning_rate = 0.1
+
+# Training
+for epoch in range(10):
+    print(f"\nEpoch {epoch+1}")
+    for i in range(len(X)):
+        y_pred = np.sign(np.dot(X[i], weights))
+        error = Y[i] - y_pred
+        weights += learning_rate * error * X[i]
+        print(f"Sample {i+1}: Pred={y_pred}, Error={error}, Weights={weights}")
+
+# Display final weights
+print("\nFinal weights after Perceptron Delta Rule:", weights)
+
